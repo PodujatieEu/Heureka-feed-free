@@ -1,8 +1,8 @@
-﻿<?php
-/* 
-Plugin Name: XML FEED heureka (PODUJATIE.EU)
+<?php error_reporting(0); ?><?php
+/*
+Plugin Name: XML FEED heureka
 Plugin URI: http://www.podujatie.eu/
-Version: 2.00
+Version: 2.25
 Author: Podujatie.eu, Ing. Igor Kona
 License: SW sa nesmie ďalej predávať, ani akokoľvek šíriť bez vedomia a dohody s autorom. SW licencia je platná na všetky weby v rámci jednej domény jedného kupujúceho. Autor nenesie zodpovednosť pokiaľ SW akokoľvek poškodí dáta, alebo spôsobí škodu. Kúpou a platbou súhlasíte s týmto licenčným dojednaním. Autor si ďalej vyhradzuje právo úpravy tohto licenčného dojednania. Platba je jednorazová a sú v nej zahrnuté prípadné aktualizácie a pomoc pri štandardnej inštalácii. 
 Description: Generuje xml feed pre heureka od woocommerce produktov. Vytvoril Podujatie.eu. !! Nastavenia -> XML Feed Heureka !!
@@ -11,19 +11,22 @@ Description: Generuje xml feed pre heureka od woocommerce produktov. Vytvoril Po
 
 SW sa nesmie ďalej predávať, ani akokoľvek šíriť bez vedomia a dohody s autorom. SW licencia je platná na všetky weby v rámci jednej domény jedného kupujúceho. Autor nenesie zodpovednosť pokiaľ SW akokoľvek poškodí dáta, alebo spôsobí škodu. Kúpou a platbou súhlasíte s týmto licenčným dojednaním. Autor si ďalej vyhradzuje právo úpravy tohto licenčného dojednania. Platba je jednorazová a sú v nej zahrnuté prípadné aktualizácie a pomoc pri štandardnej inštalácii. Zasahovanie do kódu pluginu, jeho časti či akákoľvek úprava je zakázaná. V opačnom prípade autor nenesia žiadnu zodpovednosť a taktiež povinnosť na akejkoľvek náprave.
 
-Ďalšie šírenie tohto pluginu je ZAKÁZANÉ! Zákon č. 618/2003 Z.z. o autorskom práve a právach súvisiacich s autorským právom (autorský zákon) a Zákon č. 300/2005 Z.z. Trestný zákon, §283 Porušovanie autorského práva.
+Ďalšie šírenie tohto pluginu je ZAKÁZANÉ!! Zákon č. 618/2003 Z.z. o autorskom práve a právach súvisiacich s autorským právom (autorský zákon) a Zákon č. 300/2005 Z.z. Trestný zákon, §283 Porušovanie autorského práva.
 
 Ing. Igor Kona; IČO: 43729444; DIČ: 1078646503IČ; DPH: SK1078646503; platobné údaje na stránke Podujatie.eu.
 */
 
 if (!isset($wpdb)) $wpdb = $GLOBALS['wpdb'];
 
+//Načítanie update
+require plugin_dir_path( __FILE__ ) . 'update-notifier-heureka-feed-free.php';
+
 //Define the product feed php page
 function podujatie3_feed_rss3() {
- $rss_template = dirname(__FILE__) . '/product-feed.php';
+ $rss_template = dirname(__FILE__) . "/".heureka.'/product-feed-heureka.php';
  load_template ( $rss_template );
 }
-
+ob_start();
 //Add the product feed RSS
 add_action('do_feed_heureka', 'podujatie3_feed_rss3', 10, 1);
 
@@ -45,8 +48,7 @@ function moje_pridanie_produkt_heureka( ) {
  $wp_rewrite->flush_rules();
 }
 
-
-$podujatie3_ver = '2.00';
+$podujatie3_ver = '2.2';
 
 /* 
  * NEMENIT - inak moze nastat poskodenie systemu
@@ -58,7 +60,6 @@ add_option('product_dph', 'DPH');
 add_option('product_na_sklade', 'na sklade');
 add_option('product_out_stock', 'mimo skladu');
 add_option('product_type', 'Software &gt; Wordpress &gt; Plugin');
-
 
 add_option('podujatie3_what_to_show', 'both');
 add_option('podujatie3_which_first', 'posts');
@@ -79,7 +80,6 @@ add_option('podujatie3_page_nav', '1');
 add_option('podujatie3_page_nav_where', 'top');
 add_option('podujatie3_xml_path', '');
 
-
 add_option('podujatie3_xml_where', 'last');
 
 /*
@@ -87,7 +87,7 @@ add_option('podujatie3_xml_where', 'last');
  */
 function podujatie3_xml_feed2() {
 	if (function_exists('add_options_page')) {
-		add_options_page('XML Feed heureka', 'XML Feed heureka', 8, __FILE__, 'podujatie3_options_page');
+		add_options_page('XML Feed heureka', 'XML Feed heureka', 'manage_options', __FILE__, 'podujatie3_options_page');
 	}
 }
 
@@ -127,7 +127,7 @@ function podujatie3_options_page() {
 			update_option('product_out_stock', 'mimo skladu');
 		update_option('podujatie3_xml_where', 'last');
 
-		echo podujatie3_DEFAULTS_LOADED;
+		echo Nastavenia_upravene;
 		echo '</strong></p></div>';	
 
 	} else if (isset($_POST['info_update'])) {
@@ -156,24 +156,22 @@ function podujatie3_options_page() {
 		update_option('podujatie3_page_nav_where', (string) $_POST["podujatie3_page_nav_where"]);
 		update_option('podujatie3_xml_path', (string) $_POST["podujatie3_xml_path"]);
 		update_option('product_type', (string) $_POST["product_type"]);
-			update_option('product_dph', (string) $_POST["product_dph"]);
-update_option('product_na_sklade', (string) $_POST["product_na_sklade"]);
-update_option('product_out_stock', (string) $_POST["product_out_stock"]);
+		update_option('product_dph', (string) $_POST["product_dph"]);
+		update_option('product_na_sklade', (string) $_POST["product_na_sklade"]);
+		update_option('product_out_stock', (string) $_POST["product_out_stock"]);
 		update_option('podujatie3_xml_where', (string) $_POST["podujatie3_xml_where"]);	
 
-		echo podujatie3_CONFIG_UPDATED;
+		echo Nastavenia_upravene;
 	    echo '</strong></p></div>';
+ob_flush();
 	} ?>
-
 	<div class="wrap">
-
-	<h2>Woocommerce xml feed pre web heureka od Podujatie.eu - v. <?php echo $podujatie3_ver; ?> - Free verzia</h2>
-
+	<h2>Woocommerce xml feed pre web heureka od Podujatie.eu - v.<?php echo $podujatie3_ver; ?>- Free verzia</h2>
 	<form method="post" action="<?php echo $_SERVER["REQUEST_URI"]; ?>">
 	<input type="hidden" name="info_update" id="info_update" value="true" />
 <table width=100% border=0>
 <tr><td width=50%  valign="top">
-<center><a href="http://www.podujatie.eu/"><img src="<?php bloginfo_rss('wpurl') ?>/wp-content/plugins/heureka-feed/web-logo3.jpg" width="300" height="100" border="0"></a></center>
+<center><a href="http://www.podujatie.eu/"><img src="<?php bloginfo_rss('wpurl') ?>/wp-content/plugins/heureka-feed/pic/web-logo3.jpg" width="300" height="100" border="0"></a></center>
 <p><font face="Georgia, Arial, Garamond" size="3">Získajte najnovšiu verziu tohto produktu na tejto stránke 
 <a target="_blank" href="http://www.podujatie.eu">Podujatie.eu</a></font></p>
 
@@ -184,15 +182,15 @@ update_option('product_out_stock', (string) $_POST["product_out_stock"]);
 	Plugin je vyvíjaný v spolupráci so spoločnosťou Ing. Igor Kóňa, kde prebehne aj tvoja platba, ak sa rozhodneš aktivovať si Premium verziu. Ďakujeme</legend>
 
 <br />
-<p> Ak chceš pomoc, vrámi Free verzie tohto programu, ti pomôžeme prostredníctvom dotazníka pomoci alebo na fóre. </font><font face="Times New Roman, Arial, Garamond" color="darkred"><b>
+<p> Ak chceš pomoc, vrámci Free verzie tohto programu, ti pomôžeme prostredníctvom dotazníka pomoci alebo na fóre. </font><font face="Times New Roman, Arial, Garamond" color="darkred"><b>
 Ďalšie šírenie tohto pluginu je ZAKÁZANÉ! Zákon č. 618/2003 Z.z. o autorskom práve a právach súvisiacich s autorským právom (autorský zákon) a Zákon č. 300/2005 Z.z. Trestný zákon, §283 Porušovanie autorského práva.
 </b></p></font>
 </td><td widht=50%  valign="top">
-<img src="<?php bloginfo_rss('wpurl') ?>/wp-content/plugins/heureka-feed/heureka-free-small.jpg" align="right" width="105" height="160">
+<img src="<?php bloginfo_rss('wpurl') ?>/wp-content/plugins/heureka-feed/pic/heureka-free-xml.jpg" align="right" width="161" height="161">
 <p><font face="Georgia, Arial, Garamond" size="3">Ďakujeme, že využívaš verziu FREE.<br>
-<img src="<?php bloginfo_rss('wpurl') ?>/wp-content/plugins/heureka-feed/heureka-premium-small.jpg" align="left" width="105" height="160">Výhody, ktoré získaš, ak si aktivuješ premium verziu:<br>
+<img src="<?php bloginfo_rss('wpurl') ?>/wp-content/plugins/heureka-feed/pic/heureka-pro-xml.jpg" align="left" width="161" height="161"><b>Výhody, ktoré získaš, ak si aktivuješ premium verziu:</b><br>
 <ol>
-<li>vo feed sa ti zobrazí až 999 produktov
+<li>vo feede sa ti zobrazí až 99999 produktov
 <li>vo feede sa zobrazuje link na obrázok produktu
 <li>nastavenie si výrobcu/dodávateľa/značku produktov
 <li>nastavenie si dodacích podmienok a všetko ohľadne toho
@@ -204,7 +202,7 @@ update_option('product_out_stock', (string) $_POST["product_out_stock"]);
 Nezabudni sa stať naším fanúšikom na </font><font face="Georgia, Arial, Garamond" size="3" color="3B5998"><b>
 <a href="http://www.facebook.com/PodujatieEu">Facebook-u Podujatie.eu</a></font></b></p>
 </td></tr></table>
-
+<hr>
 	<fieldset class="options">
 
 	<table width="100%" border="0" cellspacing="0" cellpadding="6">
@@ -251,7 +249,7 @@ Nezabudni sa stať naším fanúšikom na </font><font face="Georgia, Arial, Gar
 	<br />Vždy použi  <code>&amp;amp;</code>  <code>&amp;gt;</code>  nie & alebo >
 	</td></tr>
 
-	<br /><br /><br /><br />
+	<br /><br /><br />
 
 	</table>
 	</fieldset>
@@ -262,7 +260,7 @@ Nezabudni sa stať naším fanúšikom na </font><font face="Georgia, Arial, Gar
 	</div>
 
 	</form>
-
+<hr>
 	<h2> Tvoj celkový xml feed môžeš vzhliadnuť tu <a target="_blank" href="<?php bloginfo_rss('wpurl') ?>/feed/heureka/"><?php bloginfo_rss('wpurl') ?>/feed/heureka/</a></h2>
 	 <strong>Nevidíš svoj xml feed?</strong>
 
@@ -282,12 +280,11 @@ Nezabudni sa stať naším fanúšikom na </font><font face="Georgia, Arial, Gar
 <th>Kategória</th>
 <th>EAN</th>
 </tr>
-	<?php
+<?php
     $args = array( 'post_type' => 'product', 'posts_per_page' => 1 );
     $loop = new WP_Query( $args );
     while ( $loop->have_posts() ) : $loop->the_post(); global $product;
-    ?>
-
+?>
 	<product>
 	<tr>
 		<td><ITEM_ID><?php echo $product->get_sku(); ?></ITEM_ID></td>
@@ -301,12 +298,10 @@ Nezabudni sa stať naším fanúšikom na </font><font face="Georgia, Arial, Gar
 		<td><PRICE_VAT><?php echo $product->price ?></PRICE_VAT></td>
 		<td><CATEGORYTEXT><?php echo get_option('product_type') ?></CATEGORYTEXT></td>
 		<td><EAN><?php echo $product->get_sku(); ?></EAN></td>
-
 <?php rss_enclosure(); ?>
-    <?php do_action('rss2_item'); ?>
+<?php do_action('rss2_item'); ?>
     </tr></product>
-
-    <?php endwhile; ?>
+<?php endwhile; ?>
 </table>
 
 <script type="text/javascript">
@@ -325,6 +320,6 @@ Nezabudni sa stať naším fanúšikom na </font><font face="Georgia, Arial, Gar
 
 </script>
 
-	</div><?php
+</div><?php
 }
 add_action('admin_menu', 'podujatie3_xml_feed2');
