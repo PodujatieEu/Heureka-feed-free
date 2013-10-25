@@ -3,7 +3,7 @@ Contributors: Andrej Kona, Ing. Igor Kona, Podujatie.eu
 Donate link: http://www.podujatie.eu
 Tags: xml, woocommerce, feed, podujatie.eu
 Requires at least: 3.0.1
-Tested up to: 3.6
+Tested up to: 3.4
 Stable tag: 4.3
 License: GPLv2 or later
 License URI: http://www.podujatie.eu/
@@ -14,7 +14,7 @@ Plugin generuje xml feed pre obchod pod správou woocommerce na platforme wordpr
 
 Plugin vytvorený pre platformu Wordpress a naň stavaný e-shop Woocommerce ponúka jeho majiteľom veľmi jednoduché, no pritom dostatočné vygenerovanie produktov do XML feed-u s vlastnou url linkou potrebnou pre načítanie portálom Heureka.sk.
 
-Free verzia (zadarmo) dokáže vygenerovať na jeden xml feed spolu až 50 produktov!!! Viete si nastaviť dodatočne voliteľné údaje, vďaka ktorým zákazníci produkt skôr nájdu, získajú viac informácii a rýchlejšie vykonajú preklik na vašu stránku.
+Pro verzia (platená) dokáže vygenerovať na jeden xml feed spolu až 50 produktov!!! Viete si nastaviť dodatočne voliteľné údaje, vďaka ktorým zákazníci produkt skôr nájdu, získajú viac informácii a rýchlejšie vykonajú preklik na vašu stránku.
 
 == Installation ==
 
@@ -42,10 +42,6 @@ Je potrebné prihlásiť sa ako "Obchod" na tomto portáli, následne zvoliť na
 
 Nastal konflikt pluginov. Prosím vypnite všetky pluginy a podľa dôležitosti ich zapnite znova. Niektoré pluginy zapríčiňujú konflikt tým, že majú rovnaké kódovacie parametre. Ak nájdete takýto konflikt, dajte nám vedieť, chybu sa pokúsime odstrániť.
 
-= &#187; Page not found - vypisuje na RSS feed-e =
-
-Je potrebné, aby ste mali aspoň jednu vytvorenú stránku a jeden koment na stránke. Toto je problém Wordrpess-u.
-
 = Iná pomoc? =
 
 Navštívte stránku http://www.podujatie.eu a napíšte nám do podpory užívateľov.
@@ -58,54 +54,10 @@ Navštívte stránku http://www.podujatie.eu a zakúpte si Pro verziu tohto plug
 
 == Changelog ==
 
-= 2.25 =
-Úprava linku kontroly verzií
-
-= 2.20 =
-Kontrola nových verzií
-
-= 2.10 =
-Zmena načítavania chybových hlásení
-Cesta k RSS template zmenená
-Upravený RSS Template - obmädzenie chybových hlásení
-
-= 2.0 =
-Jazykový súbor odstránený.
-Vylepšená prehľadnosť pluginu.
-Zrýchlenie pluginu.
-Rozdelenie na Pro a Free verziu.
-Grafická úprava administrátorského rozhrania.
-Úprava zdrojového kódu, eliminovanie chybového hlásenia, zmena administrátorského načítavania.
-
-= 1.11 =
-Úprava jazykového súboru
-
-= 1.10 =
-Upresnenie jazykového načítavania.
-
-= 1.0 =
-Vytvorenie pluginy s voliteľnými možnosťami.
-
-= 0.01 =
-Základné vytovrenie pluginu
-
 == Upgrade Notice ==
 
-= 2.20 =
-Kontrola nových verzií
-
-= 2.10 =
-Zmena načítavania chybových hlásení
-Cesta k RSS template zmenená
-Upravený RSS Template - obmädzenie chybových hlásení
-
 = 2.0 =
-Jazykový súbor odstránený.
-Vylepšená prehľadnosť pluginu.
-Zrýchlenie pluginu.
-Rozdelenie na Pro a Free verziu.
-Grafická úprava administrátorského rozhrania.
-Úprava zdrojového kódu, eliminovanie chybového hlásenia, zmena administrátorského načítavania.
+Jazykový súbor odstránený. Vylepšená prehľadnosť pluginu. Zrýchlenie pluginu. Rozdelenie na Pro a Free verziu. Grafická úprava administrátorského rozhrania.
 
 = 1.11 =
 Úprava jazykového súboru
@@ -121,7 +73,7 @@ Základné vytovrenie pluginu
 
 == Arbitrary section ==
 
-SW sa nesmie ďalej predávať, ani akokoľvek šíriť bez vedomia a dohody s autorom. SW licencia je platná na všetky weby v rámci jednej domény jedného kupujúceho. Autor nenesie zodpovednosť pokiaľ SW akokoľvek poškodí dáta, alebo spôsobí škodu. Kúpou a platbou súhlasíte s týmto licenčným dojednaním. Autor si ďalej vyhradzuje právo úpravy tohto licenčného dojednania. Platba je jednorazová a sú v nej zahrnuté prípadné aktualizácie a pomoc pri štandardnej inštalácii. Zasahovanie do kódu pluginu, jeho časti či akákoľvek úprava je zakázaná. V opačnom prípade autor nenesie žiadnu zodpovednosť a taktiež povinnosť na akejkoľvek náprave. Najprv pred zakúpením pluginu vyskúšajte aspoň na 3 dni jeho Free verziu, či plugin pracuje korektne. Nakoľko nie je jasné, aké pluginy, systém a prepojenia používa objednávateľ tohto pluginu, nemôžeme zaručiť jeho korektné správanie sa na 100%. Plugin je otestovaný a na 99% negeneruje žiadne fatálne chyby. Zakúpením nevzniká automatický nárok na všetky ďalšie verzie, ani na úpravu pluginu, ani zásahy do pluginu. Plugin kupujte až po vyskúšaní Free verzie. V prípade nekompatibility pluginu s Vaším Wordpressom, nevzniká Vám nárok na vrátenie ceny pluginu! Do pluginu nijako nezasahujte ani ho neupravujte. Plugin kupujete na vlastné riziko!
+SW sa nesmie ďalej predávať, ani akokoľvek šíriť bez vedomia a dohody s autorom. SW licencia je platná na všetky weby v rámci jednej domény jedného kupujúceho. Autor nenesie zodpovednosť pokiaľ SW akokoľvek poškodí dáta, alebo spôsobí škodu. Kúpou a platbou súhlasíte s týmto licenčným dojednaním. Autor si ďalej vyhradzuje právo úpravy tohto licenčného dojednania. Platba je jednorazová a sú v nej zahrnuté prípadné aktualizácie a pomoc pri štandardnej inštalácii. Zasahovanie do kódu pluginu, jeho časti či akákoľvek úprava je zakázaná. V opačnom prípade autor nenesia žiadnu zodpovednosť a taktiež povinnosť na akejkoľvek náprave.
 
 Ďalšie šírenie tohto pluginu je ZAKÁZANÉ! Zákon č. 618/2003 Z.z. o autorskom práve a právach súvisiacich s autorským právom (autorský zákon) a Zákon č. 300/2005 Z.z. Trestný zákon, §283 Porušovanie autorského práva.
 
